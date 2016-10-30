@@ -12154,21 +12154,21 @@ Testing set has 95 samples.
 <li>Real-world application: spam filtering (source: <a href="http://scikit-learn.org/stable/modules/naive_bayes.html">sklearn</a>)</li>
 <li>Strengths: can be very fast, requires a relatively small amount of training data to perform well, and performs classification very well</li>
 <li>Weaknesses: does not perform regression well, or in other words, does not estimate values very well</li>
-<li>Why good candidate: this is a classification problem! so naive bayes should perform relatively well</li>
+<li>Why good candidate: B/c this is a relatively small training set, and b/c this is a classification problem, naive bayes could be a good fit. It is also pretty fast and computationally inexpensive, so that will be pleasing to the local school district. The accuracy is predicted to be fairly high as Naive Bayes performs well on classification problems.</li>
 </ul>
 </li>
 <li><strong>Decision Trees</strong><ul>
 <li>Real-world application: filtering out noise from Hubble Space telescope (source: <a href="http://www.cbcb.umd.edu/~salzberg/docs/murthy_thesis/survey/node32.html">cbcb.umd.edu</a>)</li>
 <li>Strengths: can handle both numerical and categorical data very well, simple to understand visually (less of a black-box algorithm)</li>
 <li>Weaknesses: can easily overfit, especially if depth is large. results can be biased if some classes dominate</li>
-<li>Why good candidate: our data has both categorical and numeric variables, so a decision tree should be able to handle this quite well</li>
+<li>Why good candidate: our data has both categorical and numeric variables, so a decision tree should be very preferable for that reason. One of the biggest reasons for why it is a good candidate though, is the model interpretability. B/c we are dealing with non-technical stakeholders, the ability to demystify the algorithm visually would be a huge plus in this situation, which decision trees happen to do very well.</li>
 </ul>
 </li>
 <li><strong>Support Vector Machines</strong><ul>
 <li>Real-world application: classification of images (source: <a href="https://en.wikipedia.org/wiki/Support_vector_machine">wikipedia</a>)</li>
 <li>Strengths: really good at classifying between two different labels, and works well with many features</li>
 <li>Weaknesses: can perform poorly if number of features is greater than the number of training data examples</li>
-<li>Why good candidate: since we are classifying between two labels, SVM should do a good job</li>
+<li>Why good candidate: since we are classifying between two labels, and this problem is not obviously linear, SVMs provide a great way to find the difference between passing/failing. SVMs also do very well with many dimensions, and since this dataset has 30 dimensions, SVMs should be able to handle the data fairly well. </li>
 </ul>
 </li>
 </ol>
@@ -12269,7 +12269,7 @@ Testing set has 95 samples.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[40]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import the three supervised learning models from sklearn</span>
@@ -12279,38 +12279,21 @@ Testing set has 95 samples.
 
 <span class="c1"># TODO: Initialize the three models</span>
 <span class="n">clf_A</span> <span class="o">=</span> <span class="n">GaussianNB</span><span class="p">()</span>
-<span class="n">clf_B</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">()</span>
-<span class="n">clf_C</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">()</span>
-
-<span class="c1"># TODO: Set up the training set sizes</span>
-<span class="n">X_train_100</span> <span class="o">=</span> <span class="n">X_train</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span>
-<span class="n">y_train_100</span> <span class="o">=</span> <span class="n">y_train</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span>
-
-<span class="n">X_train_200</span> <span class="o">=</span> <span class="n">X_train</span><span class="p">[:</span><span class="mi">200</span><span class="p">]</span>
-<span class="n">y_train_200</span> <span class="o">=</span> <span class="n">y_train</span><span class="p">[:</span><span class="mi">200</span><span class="p">]</span>
-
-<span class="n">X_train_300</span> <span class="o">=</span> <span class="n">X_train</span><span class="p">[:</span><span class="mi">300</span><span class="p">]</span>
-<span class="n">y_train_300</span> <span class="o">=</span> <span class="n">y_train</span><span class="p">[:</span><span class="mi">300</span><span class="p">]</span>
+<span class="n">clf_B</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">clf_C</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
 
 <span class="c1"># TODO: Execute the &#39;train_predict&#39; function for each classifier and each training set size</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;A100&quot;</span><span class="p">)</span>
-<span class="n">train_predict</span><span class="p">(</span><span class="n">clf_A</span><span class="p">,</span> <span class="n">X_train_100</span><span class="p">,</span> <span class="n">y_train_100</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;A200&quot;</span><span class="p">)</span>
-<span class="n">train_predict</span><span class="p">(</span><span class="n">clf_A</span><span class="p">,</span> <span class="n">X_train_200</span><span class="p">,</span> <span class="n">y_train_200</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;A300&quot;</span><span class="p">)</span>
-<span class="n">train_predict</span><span class="p">(</span><span class="n">clf_A</span><span class="p">,</span> <span class="n">X_train_300</span><span class="p">,</span> <span class="n">y_train_300</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;B100&quot;</span><span class="p">)</span>
-<span class="n">train_predict</span><span class="p">(</span><span class="n">clf_B</span><span class="p">,</span> <span class="n">X_train_100</span><span class="p">,</span> <span class="n">y_train_100</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;B200&quot;</span><span class="p">)</span>
-<span class="n">train_predict</span><span class="p">(</span><span class="n">clf_B</span><span class="p">,</span> <span class="n">X_train_200</span><span class="p">,</span> <span class="n">y_train_200</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;B300&quot;</span><span class="p">)</span>
-<span class="n">train_predict</span><span class="p">(</span><span class="n">clf_B</span><span class="p">,</span> <span class="n">X_train_300</span><span class="p">,</span> <span class="n">y_train_300</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;C100&quot;</span><span class="p">)</span>
-<span class="n">train_predict</span><span class="p">(</span><span class="n">clf_C</span><span class="p">,</span> <span class="n">X_train_100</span><span class="p">,</span> <span class="n">y_train_100</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;C200&quot;</span><span class="p">)</span>
-<span class="n">train_predict</span><span class="p">(</span><span class="n">clf_C</span><span class="p">,</span> <span class="n">X_train_200</span><span class="p">,</span> <span class="n">y_train_200</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;C300&quot;</span><span class="p">)</span>
-<span class="n">train_predict</span><span class="p">(</span><span class="n">clf_C</span><span class="p">,</span> <span class="n">X_train_300</span><span class="p">,</span> <span class="n">y_train_300</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="c1"># TODO: loop thru models</span>
+<span class="k">for</span> <span class="n">clf</span> <span class="ow">in</span> <span class="p">[</span><span class="n">clf_A</span><span class="p">,</span> <span class="n">clf_B</span><span class="p">,</span> <span class="n">clf_C</span><span class="p">]:</span>
+
+    <span class="c1"># show the estimator type</span>
+    <span class="k">print</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">{}: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
+
+    <span class="c1"># TODO: loop thru training sizes</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="mi">300</span><span class="p">]:</span>
+
+        <span class="c1"># create training data from first 100, then 200, then 300 points</span>
+        <span class="n">train_predict</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X_train</span><span class="p">[:</span><span class="n">n</span><span class="p">],</span> <span class="n">y_train</span><span class="p">[:</span><span class="n">n</span><span class="p">],</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12323,68 +12306,68 @@ Testing set has 95 samples.
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>A100
+<pre>
+GaussianNB: 
+
 Training a GaussianNB using a training set size of 100. . .
-Trained model in 0.0015 seconds
-Made predictions in 0.0006 seconds.
-F1 score for training set: 0.8305.
+Trained model in 0.0012 seconds
 Made predictions in 0.0003 seconds.
+F1 score for training set: 0.8305.
+Made predictions in 0.0005 seconds.
 F1 score for test set: 0.6721.
-A200
 Training a GaussianNB using a training set size of 200. . .
 Trained model in 0.0008 seconds
-Made predictions in 0.0004 seconds.
+Made predictions in 0.0003 seconds.
 F1 score for training set: 0.8078.
-Made predictions in 0.0004 seconds.
+Made predictions in 0.0003 seconds.
 F1 score for test set: 0.6957.
-A300
 Training a GaussianNB using a training set size of 300. . .
-Trained model in 0.0013 seconds
+Trained model in 0.0008 seconds
 Made predictions in 0.0005 seconds.
 F1 score for training set: 0.7931.
 Made predictions in 0.0003 seconds.
 F1 score for test set: 0.6724.
-B100
+
+DecisionTreeClassifier: 
+
 Training a DecisionTreeClassifier using a training set size of 100. . .
-Trained model in 0.0009 seconds
+Trained model in 0.0007 seconds
 Made predictions in 0.0002 seconds.
 F1 score for training set: 1.0000.
 Made predictions in 0.0002 seconds.
-F1 score for test set: 0.7563.
-B200
+F1 score for test set: 0.7692.
 Training a DecisionTreeClassifier using a training set size of 200. . .
-Trained model in 0.0012 seconds
-Made predictions in 0.0002 seconds.
+Trained model in 0.0014 seconds
+Made predictions in 0.0003 seconds.
 F1 score for training set: 1.0000.
 Made predictions in 0.0002 seconds.
-F1 score for test set: 0.6667.
-B300
+F1 score for test set: 0.6723.
 Training a DecisionTreeClassifier using a training set size of 300. . .
 Trained model in 0.0019 seconds
-Made predictions in 0.0003 seconds.
+Made predictions in 0.0002 seconds.
 F1 score for training set: 1.0000.
-Made predictions in 0.0003 seconds.
-F1 score for test set: 0.6612.
-C100
+Made predictions in 0.0002 seconds.
+F1 score for test set: 0.6935.
+
+SVC: 
+
 Training a SVC using a training set size of 100. . .
 Trained model in 0.0011 seconds
-Made predictions in 0.0008 seconds.
+Made predictions in 0.0007 seconds.
 F1 score for training set: 0.8707.
-Made predictions in 0.0008 seconds.
+Made predictions in 0.0007 seconds.
 F1 score for test set: 0.7681.
-C200
 Training a SVC using a training set size of 200. . .
-Trained model in 0.0032 seconds
-Made predictions in 0.0025 seconds.
+Trained model in 0.0031 seconds
+Made predictions in 0.0023 seconds.
 F1 score for training set: 0.8738.
-Made predictions in 0.0017 seconds.
-F1 score for test set: 0.7943.
-C300
-Training a SVC using a training set size of 300. . .
-Trained model in 0.0074 seconds
-Made predictions in 0.0045 seconds.
-F1 score for training set: 0.8595.
 Made predictions in 0.0015 seconds.
+F1 score for test set: 0.7943.
+Training a SVC using a training set size of 300. . .
+Trained model in 0.0066 seconds
+Made predictions in 0.0053 seconds.
+F1 score for training set: 0.8595.
+Made predictions in 0.0016 seconds.
 F1 score for test set: 0.7832.
 </pre>
 </div>
@@ -12422,22 +12405,22 @@ F1 score for test set: 0.7832.
 <tbody>
 <tr>
 <td style="text-align:center">100</td>
-<td style="text-align:center">0.0015 seconds</td>
-<td style="text-align:center">0.0006 seconds</td>
+<td style="text-align:center">0.0012 seconds</td>
+<td style="text-align:center">0.0005 seconds</td>
 <td style="text-align:center">0.8305</td>
 <td style="text-align:center">0.6721</td>
 </tr>
 <tr>
 <td style="text-align:center">200</td>
 <td style="text-align:center">0.0008 seconds</td>
-<td style="text-align:center">0.0004 seconds</td>
+<td style="text-align:center">0.0003 seconds</td>
 <td style="text-align:center">0.8078</td>
 <td style="text-align:center">0.6957</td>
 </tr>
 <tr>
 <td style="text-align:center">300</td>
-<td style="text-align:center">0.0013 seconds</td>
-<td style="text-align:center">0.0005 seconds</td>
+<td style="text-align:center">0.0008 seconds</td>
+<td style="text-align:center">0.0003 seconds</td>
 <td style="text-align:center">0.7931</td>
 <td style="text-align:center">0.6724</td>
 </tr>
@@ -12456,24 +12439,24 @@ F1 score for test set: 0.7832.
 <tbody>
 <tr>
 <td style="text-align:center">100</td>
-<td style="text-align:center">0.0009 seconds</td>
+<td style="text-align:center">0.0007 seconds</td>
 <td style="text-align:center">0.0002 seconds</td>
 <td style="text-align:center">1.0000</td>
-<td style="text-align:center">0.7563</td>
+<td style="text-align:center">0.7692</td>
 </tr>
 <tr>
 <td style="text-align:center">200</td>
-<td style="text-align:center">0.0012 seconds</td>
+<td style="text-align:center">0.0014 seconds</td>
 <td style="text-align:center">0.0002 seconds</td>
 <td style="text-align:center">1.0000</td>
-<td style="text-align:center">0.6667</td>
+<td style="text-align:center">0.6723</td>
 </tr>
 <tr>
 <td style="text-align:center">300</td>
 <td style="text-align:center">0.0019 seconds</td>
-<td style="text-align:center">0.0003 seconds</td>
+<td style="text-align:center">0.0002 seconds</td>
 <td style="text-align:center">1.0000</td>
-<td style="text-align:center">0.6612</td>
+<td style="text-align:center">0.6935</td>
 </tr>
 </tbody>
 </table>
@@ -12491,21 +12474,21 @@ F1 score for test set: 0.7832.
 <tr>
 <td style="text-align:center">100</td>
 <td style="text-align:center">0.0011 seconds</td>
-<td style="text-align:center">0.0008 seconds</td>
+<td style="text-align:center">0.0007 seconds</td>
 <td style="text-align:center">0.8707</td>
 <td style="text-align:center">0.7681</td>
 </tr>
 <tr>
 <td style="text-align:center">200</td>
-<td style="text-align:center">0.0032 seconds</td>
-<td style="text-align:center">0.0025 seconds</td>
+<td style="text-align:center">0.0031 seconds</td>
+<td style="text-align:center">0.0015 seconds</td>
 <td style="text-align:center">0.8738</td>
 <td style="text-align:center">0.7943</td>
 </tr>
 <tr>
 <td style="text-align:center">300</td>
-<td style="text-align:center">0.0074 seconds</td>
-<td style="text-align:center">0.0045 seconds</td>
+<td style="text-align:center">0.0066 seconds</td>
+<td style="text-align:center">0.0016 seconds</td>
 <td style="text-align:center">0.8595</td>
 <td style="text-align:center">0.7832</td>
 </tr>
@@ -12562,7 +12545,7 @@ F1 score for test set: 0.7832.
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong></p>
-<p>I will attempt to explain, in simple terms, how the Support Vector Machines (SVM) model works. SVMs attempt to find a decision boundary between different classes (such as graduated, or not graduated), that results in the best way to distinguish between the classes based on the given data. The way the model trains the data is by plotting all of the data points, and then drawing a line, or boundary of sorts, that best separates the two types of data. In this case, the boundary is drawn between the data points where students graduated, and where they did not. The best models will make sure the boundary is such that when new data points are plotted, the points fall on the correct side of the boundary line.</p>
+<p>I will attempt to explain, in simple terms, how the Support Vector Machines (SVM) model works. SVMs attempt to find a decision boundary between different classes (such as graduated, or not graduated), that results in the best way to distinguish between the classes based on the given data. The way the model trains the data is by plotting all of the data points of past students where we know the final outcome (whether they passed or failed), and then drawing a line, or boundary of sorts, that best separates the two types of data. It does this by maximizing the margin, or distance between the two types of data points. Sometimes it is difficult to draw that boundary with low dimensions, so SVMs use something that is called the kernel trick, essentially trying to draw the boundary in a space with a higher dimension (e.g. 3D space instead of 2D space). In this case, the boundary is drawn between the data points where students graduated, and where they did not. The best models will make sure the boundary is such that when new data points are plotted, the points fall on the correct side of the boundary line.</p>
 
 </div>
 </div>
